@@ -26,6 +26,7 @@ int main()
             cout << "2. Camping MadLib" << endl;
             int userChoice = 0;
             cin >> userChoice;
+            cin.ignore();
             cout << endl;
             if (userChoice == 1)
             {
@@ -53,6 +54,10 @@ int main()
             {
                 cout << "Sorry please choose 1 or 2" << endl;
             }
+        } else if (userPlay == 'N' || userPlay == 'n')
+        {
+            cout << "Sorry you didn't want to play" << endl;
+            return 0;
         }
         else
         {
@@ -65,9 +70,9 @@ int main()
         cerr << "Failed to open one or more files." << endl;
         return 1;
     }
-    cout << "Loading..." << endl;
 
-    regex pattern("\\(([^)]+)\\)"); // Regular expression to match text inside parentheses
+
+    regex pattern("\\(.*?\\)");  // Regular expression to match text inside parentheses
 
     string line;
     while (getline(inputFile, line))
@@ -81,31 +86,62 @@ int main()
                 string replacement;
 
                 // Ask the user to enter a word based on the placeholder
-                if (placeholder == "noun")
-                {
+                if (placeholder == "noun") {
                     cout << "Please enter a noun: ";
-                }
-                else if (placeholder == "verb")
-                {
+                } else if (placeholder == "verb") {
                     cout << "Please enter a verb: ";
-                }
-                else
-                {
-                    cout << "Please enter a word for " << placeholder << ": ";
+                } else if (placeholder == "adjective") {
+                    cout << "Please enter an adjective: ";
+                } else if (placeholder == "proper noun") {
+                    cout << "Please enter a proper noun: ";
+                } else if (placeholder == "animal") {
+                    cout << "Please enter an animal: ";
+                } else if (placeholder == "color") {
+                    cout << "Please enter a color: ";
+                } else if (placeholder == "adverb") {
+                    cout << "Please enter an adverb: ";
+                } else if (placeholder == "number") {
+                    cout << "Please enter a number: ";
+                } else if (placeholder == "measure of time") {
+                    cout << "Please enter a measure of time: ";
+                } else if (placeholder == "silly word") {
+                    cout << "Please enter a silly word: ";
+                } else if (placeholder == "noun - animal"){
+                    cout << "Please enter an animal: ";
+                } else if (placeholder == "verb, past tense"){
+                    cout << "Please enter a verb, past tense: ";
                 }
 
-                cin >> replacement;
+                cin.ignore();
+                getline(cin, replacement);
 
                 // Replace the placeholder with the user's input
-                line.replace(matches.position(i), placeholder.length() + 2, replacement);
+                line = regex_replace(line, regex(placeholder), replacement);
             }
         }
 
         outputFile << line << endl; // Write the modified line to the output file
     }
-
     inputFile.close();
     outputFile.close();
+
+    cout << "MadLib completed." << endl;
+
+    ifstream output("adjustMadLib.txt");
+    if (output.is_open())
+    {
+        cout << "\nYour MadLib:\n";
+        string outputLine;
+        while (getline(output, outputLine))
+        {
+            cout << outputLine << endl;
+        }
+        output.close();
+    }
+    else
+    {
+        cerr << "Failed to open the output file for reading." << endl;
+    }
 
     return 0;
 }
