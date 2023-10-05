@@ -17,7 +17,6 @@ int main()
         cout << "--------------------------------" << endl;
         cout << "Would you like to play? (y/n): ";
         cin >> userPlay;
-        // cin.ignore();
         cout << endl;
 
         if (userPlay == 'Y' || userPlay == 'y')
@@ -103,75 +102,53 @@ int main()
                 if (placeholder == "noun")
                 {
                     cout << "Please enter a noun: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "verb")
                 {
                     cout << "Please enter a verb: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "adjective")
                 {
                     cout << "Please enter an adjective: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "proper_noun")
                 {
                     cout << "Please enter a proper noun: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "animal")
                 {
                     cout << "Please enter an animal: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "color")
                 {
                     cout << "Please enter a color: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "adverb")
                 {
                     cout << "Please enter an adverb: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "number")
                 {
                     cout << "Please enter a number: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "measure_of_time")
                 {
                     cout << "Please enter a measure of time: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "silly_word")
                 {
                     cout << "Please enter a silly word: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "noun_animal")
                 {
                     cout << "Please enter an animal: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
                 else if (placeholder == "verb_past_tense")
                 {
                     cout << "Please enter a verb, past tense: ";
-                    cin >> replacement;
-                    cin.ignore();
                 }
+
+                getline(cin >> ws, replacement);
 
                 // Replace the placeholder with the user's input
                 line = regex_replace(line, regex("\\(" + placeholder + "\\)"), replacement);

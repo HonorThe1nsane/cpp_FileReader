@@ -9,7 +9,8 @@
         "random": "cpp",
         "ostream": "cpp",
         "regex": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "istream": "cpp"
     },
     "cmake.configureOnOpen": false
 }
