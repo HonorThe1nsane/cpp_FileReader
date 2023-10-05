@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "format": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "random": "cpp",
+        "ostream": "cpp"
+    },
+    "cmake.configureOnOpen": false
+}
