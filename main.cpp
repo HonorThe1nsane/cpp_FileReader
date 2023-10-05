@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -66,36 +67,41 @@ int main()
     }
     cout << "Loading..." << endl;
 
+    regex pattern("\\(([^)]+)\\)"); // Regular expression to match text inside parentheses
+
     string line;
     while (getline(inputFile, line))
     {
-        string adjective;
-        cout << "Please enter an adjective" << endl;
-        cin >> adjective;
-        size_t pos0 = line.find("(adjective)");
-        while (pos0 != string::npos)
+        smatch matches;
+        while (regex_search(line, matches, pattern))
         {
-            line.replace(pos0, adjective.length(), adjective);
-            pos0 = line.find("(adjective)", pos0 + 1);
+            for (size_t i = 1; i < matches.size(); i++)
+            {
+                string placeholder = matches[i];
+                string replacement;
+
+                // Ask the user to enter a word based on the placeholder
+                if (placeholder == "noun")
+                {
+                    cout << "Please enter a noun: ";
+                }
+                else if (placeholder == "verb")
+                {
+                    cout << "Please enter a verb: ";
+                }
+                else
+                {
+                    cout << "Please enter a word for " << placeholder << ": ";
+                }
+
+                cin >> replacement;
+
+                // Replace the placeholder with the user's input
+                line.replace(matches.position(i), placeholder.length() + 2, replacement);
+            }
         }
-        string noun;
-        cout << "Please enter a noun" << endl;
-        size_t pos1 = line.find("(noun)");
-        while (pos1 != string::npos)
-        {
-            line.replace(pos1, noun.length(), noun);
-            pos1 = line.find("(noun)", pos1 + 1);
-        }
-        string verbPT;
-        cin >> verbPT;
-        cout << "Please enter a noun" << endl;
-        size_t pos2 = line.find("(verb, past tense)");
-        while (pos2 != string::npos)
-        {
-            line.replace(pos2, adjective.length(), verbPT);
-            pos2 = line.find("(verb, past tense)", pos2 + 1);
-        }
-        outputFile << line << endl;
+
+        outputFile << line << endl; // Write the modified line to the output file
     }
 
     inputFile.close();
