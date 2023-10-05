@@ -8,7 +8,8 @@
         "stack": "cpp",
         "random": "cpp",
         "ostream": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "fstream": "cpp"
     },
     "cmake.configureOnOpen": false
 }
