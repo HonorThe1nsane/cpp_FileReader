@@ -156,7 +156,7 @@ int main()
             }
         }
 
-        outputFile << line << endl; // Write the modified line to the output file
+        outputFile << line << endl;
     }
     inputFile.close();
     outputFile.close();
